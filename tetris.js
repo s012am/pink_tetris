@@ -635,7 +635,10 @@ function scaleBoard() {
     boardContainerEl.style.transformOrigin = '';
     return;
   }
-  const scale = (window.innerWidth - 16) / 400;
+  // 좌우 여백 48px 확보, 세로는 뷰포트의 55% 이하로 제한
+  const maxByWidth  = (window.innerWidth - 48) / 400;
+  const maxByHeight = (window.innerHeight * 0.55) / 800;
+  const scale = Math.min(maxByWidth, maxByHeight);
   boardWrapper.style.width  = `${Math.round(400 * scale)}px`;
   boardWrapper.style.height = `${Math.round(800 * scale)}px`;
   boardContainerEl.style.transform = `scale(${scale})`;
